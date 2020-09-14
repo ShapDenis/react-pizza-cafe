@@ -1,6 +1,9 @@
 const initinalState = {
     category: null,
-    sortBy: 'popular'
+    sortBy: {
+        type: 'popular',
+        order: 'desc',
+    }
 }
 export const filters = (state = initinalState, action) => {
     if (action.type === 'SET_SORT_BY') {

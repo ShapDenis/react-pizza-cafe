@@ -6,9 +6,9 @@ import {fetchPizzas} from '../redux/actions/pizzas'
 
 const categoryNames = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 const sortItems = [
-    {name: 'популярности', type: 'popular'},
-    {name: "цене", type: 'price'},
-    {name: "алфавиту", type: 'alphabet'}
+    {name: 'популярности', type: 'popular', order: 'decs'},
+    {name: "цене", type: 'price', order: 'decs'},
+    {name: "алфавиту", type: 'name', order: 'acs'}
 ]
 
 function Home() {
@@ -38,7 +38,7 @@ function Home() {
                 <Categories activeCategory={category}
                             onClickCategory={onSelectCategory}
                             items={categoryNames}/>
-                <SortPopup activeSortType={sortBy}
+                <SortPopup activeSortType={sortBy.type}
                            items={sortItems}
                            onClickSortType={onSelectSortType}
 
