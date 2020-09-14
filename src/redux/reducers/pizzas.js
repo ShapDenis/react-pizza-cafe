@@ -7,6 +7,7 @@ export const pizzas = (state = initinalState, action) => {
         return {
             ...state,
             items: action.payload,
+            isLoaded: true,
         }
     }
     return state;
