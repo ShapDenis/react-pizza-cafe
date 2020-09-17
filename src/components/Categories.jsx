@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes, {number} from "prop-types";
-import PizzaBlock from "./PizzaBlock";
+import PropTypes from "prop-types";
+//import PizzaBlock from "./PizzaBlock";
 
 // class Categories extends React.Component {
 //     state = {
