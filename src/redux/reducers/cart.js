@@ -29,6 +29,12 @@ export const cart = (state = initialState, action) => {
                 totalCount: allPizzas.length,
                 totalPrice,
             }
+        case 'CLEAR_CART':
+            return {
+                totalPrice: 0,
+                totalCount: 0,
+                items: {},
+            }
         default:
             return state;
     }
