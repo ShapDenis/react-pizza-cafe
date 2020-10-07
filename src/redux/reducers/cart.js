@@ -4,6 +4,7 @@ const initialState = {
     totalCount: 0,
 }
 
+const getTotalPrice = (arr) => arr.reduce((sum, obj) => obj.price + sum, 0);
 const _get = (obj, path) => {
     const [firstKey, ...keys] = path.split('.');
     return keys.reduce((val, key) => {
@@ -60,6 +61,44 @@ export const cart = (state = initialState, action) => {
                 totalCount: 0,
                 items: {},
             }
+        case 'PLUS_ITEM': {
+            const newObjItems = [...state.items[action.payload].items, state.items[action.payload].items[0]];
+            const newItems = {
+                ...state.items,
+                [action.payload]: {
+                    items: newObjItems,
+                    totalPrice: getTotalPrice(newObjItems),
+                },
+            }
+            const totalCount = getTotalSum(newItems, 'items.length');
+            const totalPrice = getTotalSum(newItems, 'totalPrice');
+            return {
+                ...state,
+                items: newItems,
+                totalCount,
+                totalPrice,
+            }
+        }
+        case 'MINUS_ITEM': {
+            const oldItems = state.items[action.payload].items.slice(1);
+            const newObjItems = oldItems.length > 1 ? state.items[action.payload].items.slice(1) : oldItems;
+            const newItems = {
+                ...state.items,
+                [action.payload]: {
+                    items: newObjItems,
+                    totalPrice: getTotalPrice(newObjItems),
+                },
+            }
+            const totalCount = getTotalSum(newItems, 'items.length');
+            const totalPrice = getTotalSum(newItems, 'totalPrice');
+
+            return {
+                ...state,
+                items: newItems,
+                totalCount,
+                totalPrice,
+            };
+        }
         case 'REMOVE_CART_ITEM':
             const newItemsCart = {
                 ...state.items

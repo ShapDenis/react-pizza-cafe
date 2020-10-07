@@ -4,7 +4,9 @@ import {Link} from 'react-router-dom';
 
 import CartItem from "../components/CartItem";
 import CartEmptyImage from "../assets/img/empty-cart.png"
-import {clearCart, removeCartItem} from "../redux/actions/cart";
+import {clearCart, removeCartItem, plusItem, minusItem} from "../redux/actions/cart";
+import Button from "../components/Button";
+import cart from "../redux/reducers/cart";
 
 
 function Cart() {
@@ -25,6 +27,15 @@ function Cart() {
         if (window.confirm('Вы действительно хотите удалить пиццу ?')) {
             dispatch(removeCartItem(id));
         }
+    }
+    const onPlusItem = (id) => {
+        dispatch(plusItem(id));
+    }
+    const onMinusItem = (id) => {
+        dispatch(minusItem(id));
+    }
+    const onClickOrder = () => {
+        console.log("Ваш заказ", items)
     }
     return (
         <div className="content">
@@ -68,13 +79,17 @@ function Cart() {
                         </div>
                         <div className="content__items">
                             {addedPizzas.map((obj) => (
-                                <CartItem id={obj.id}
-                                          name={obj.name}
-                                          type={obj.type}
-                                          size={obj.size}
-                                          totalPrice={items[obj.id].totalPrice}
-                                          totalCount={items[obj.id].items.length}
-                                          onRemove={onRemoveCartItem}
+                                <CartItem
+                                    key={obj.id}
+                                    id={obj.id}
+                                    name={obj.name}
+                                    type={obj.type}
+                                    size={obj.size}
+                                    totalPrice={items[obj.id].totalPrice}
+                                    totalCount={items[obj.id].items.length}
+                                    onRemove={onRemoveCartItem}
+                                    onMinus={onMinusItem}
+                                    onPlus={onPlusItem}
                                 />)
                             )}
 
@@ -92,16 +107,18 @@ function Cart() {
                                               strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
 
-                                    <span>Вернуться назад</span>
+                                    <Link to="/">
+                                        <span>Вернуться назад</span>
+                                    </Link>
                                 </a>
-                                <div className="button pay-btn">
+                                <Button onClick={onClickOrder} className="button pay-btn">
                                     <span>Оплатить сейчас</span>
-                                </div>
+                                </Button>
                             </div>
                         </div>
                     </div>
                     : <div className="cart cart--empty">
-                        <h2>Корзина пустая <icon>😕</icon></h2>
+                        <h2>Корзина пустая <i>😕</i></h2>
                         <p>
                             Вероятней всего, вы не заказывали ещё пиццу.<br/>
                             Для того, чтобы заказать пиццу, перейди на главную страницу.
