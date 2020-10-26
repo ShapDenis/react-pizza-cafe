@@ -35,19 +35,6 @@ export const cart = (state = initialState, action) => {
                     totalPrice: currentPizzaItems.reduce((sum, obj) => obj.price + sum, 0),
                 }
             }
-            // const items = Object.values(newItems).map(obj => obj.items);
-            // const allPizzas = [].concat.apply([], items)
-            // const totalPrice = allPizzas.reduce((sum, obj) => obj.price + sum, 0);
-            // const totalCount = Object.keys(newItems).reduce(
-            //     (sum, key) => newItems[key].items.length + sum,
-            //     0,
-            // );
-            //
-            // const totalPrice = Object.keys(newItems).reduce(
-            //     (sum, key) => newItems[key].totalPrice + sum,
-            //     0,
-            // );
-
             const totalCount = getTotalSum(newItems, 'items.length');
             const totalPrice = getTotalSum(newItems, 'totalPrice');
 

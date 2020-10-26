@@ -8,7 +8,7 @@ export const setLoaded = (payload) => ({
 export const fetchPizzas = (sortBy, category) => (dispatch) => {
     dispatch(setLoaded(false));
 
-    axios.get(`/pizzas?${category !== null ? `category=${category}` : ''
+    axios.get(`https://react-pizza-back.herokuapp.com/pizzas?${category !== null ? `category=${category}` : ''
     }&_sort=${sortBy.type}&_order=${sortBy.order}`)
         .then(({data}) => {
             dispatch(setPizzas(data));
