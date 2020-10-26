@@ -31,12 +31,13 @@
     "server": "npx json-server --watch public/db.json --port 3001",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
+
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://react-pizza-back.herokuapp.com/",
+  "proxy": "https://react-pizza-back.herokuapp.com",
   "browserslist": {
     "production": [
       ">0.2%",
